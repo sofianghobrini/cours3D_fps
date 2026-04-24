@@ -1,0 +1,4 @@
+repository "Cours3d_FPS/Cours3d_FPS@9072360385190@cloud"
+  path "/"
+    br "/main"
+    co "/main"
