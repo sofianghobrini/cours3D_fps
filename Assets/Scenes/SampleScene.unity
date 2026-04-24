@@ -170,7 +170,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -531,7 +531,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1079,7 +1079,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -1210,7 +1210,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65ad275ae65b004fb5bc555fa7d597b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  speed: 0
+  speed: 3
+  mouseSensitivityX: 3
+  mouseSensitivityY: 10
 --- !u!114 &1127318127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1223,6 +1225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 229ba20c37239474d8cf55ab6aa13872, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  cam: {fileID: 1630097204}
 --- !u!54 &1127318128
 Rigidbody:
   m_ObjectHideFlags: 0
