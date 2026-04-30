@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4886001833557754638}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7391280217497459112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 2978017879347950684}
   - component: {fileID: 6485353054181351305}
   - component: {fileID: 7277709858040737625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 7127937097516318608}
   - component: {fileID: 8838202450437999153}
   - component: {fileID: 8765540245686530482}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   - component: {fileID: 5834995351120802048}
   - component: {fileID: 6282067238422015320}
   - component: {fileID: 1852043648126263717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -413,7 +413,7 @@ GameObject:
   - component: {fileID: 9106325215572086840}
   - component: {fileID: 2172830088948680734}
   - component: {fileID: 6222386817616386996}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ModelPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -505,7 +505,7 @@ GameObject:
   - component: {fileID: 2760864544505601200}
   - component: {fileID: 8918124214348827611}
   - component: {fileID: 9080268316417938536}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,9 +682,10 @@ GameObject:
   - component: {fileID: 3900982840625418393}
   - component: {fileID: -6088863707709981047}
   - component: {fileID: 3333813997457375873}
-  m_Layer: 0
+  - component: {fileID: -5780784882077746540}
+  m_Layer: 6
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -767,6 +768,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   cam: {fileID: 2424443982400622461}
+  cameraRotationLimit: 85
 --- !u!114 &298217719242784229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -782,6 +784,9 @@ MonoBehaviour:
   speed: 3
   mouseSensitivityX: 3
   mouseSensitivityY: 10
+  thrustForce: 1000
+  jointSpring: 20
+  jointMaxForce: 40
 --- !u!114 &660615553846559182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,6 +824,8 @@ MonoBehaviour:
   - {fileID: 298217719242784229}
   - {fileID: 2424443982400622461}
   - {fileID: 2760864544505601200}
+  - {fileID: -5780784882077746540}
+  remoteLayerName: RemotePlayer
 --- !u!114 &-6088863707709981047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -955,3 +962,26 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &-5780784882077746540
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8008380530974543152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 038f2781f14987441a3f5bf6963a9e72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  syncDirection: 0
+  syncMode: 0
+  syncInterval: 0
+  weapon:
+    weaponName: Submachine Gun
+    damage: 10
+    range: 100
+  cam: {fileID: 2424443982400622461}
+  mask:
+    serializedVersion: 2
+    m_Bits: 183
