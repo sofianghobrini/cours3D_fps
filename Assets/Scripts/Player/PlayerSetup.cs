@@ -28,13 +28,16 @@ public class PlayerSetup : NetworkBehaviour
             }      
         }
 
-        RegisterPlayer();
     }
 
-    private void RegisterPlayer(){
-        //On utilise le netId du joueur pour le nommer dans la hiérarchie de Unity, ce qui permet de les différencier facilement
-        string playerName = GetComponent<NetworkIdentity>().netId.ToString();
-        transform.name = playerName;
+    public override void OnStartClient()
+    {
+        base.OnStartClient();
+
+        string netId = GetComponent<NetworkIdentity>().netId.ToString();
+        Player player = GetComponent<Player>();
+
+        GameManager.RegisterPlayer(netId, player);
     }
 
 
@@ -56,5 +59,7 @@ public class PlayerSetup : NetworkBehaviour
         {
             sceneCamera.gameObject.SetActive(true);
         }
+
+        GameManager.UnregisterPlayer(transform.name); 
     }
 }

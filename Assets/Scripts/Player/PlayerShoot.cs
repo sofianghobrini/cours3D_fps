@@ -37,13 +37,16 @@ public class PlayerShoot : NetworkBehaviour
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
-            CmdPlayerShoot(hit.transform.name); // Envoie une commande au serveur pour indiquer que le joueur a été touché
+            CmdPlayerShoot(hit.transform.name, weapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
         }
     }
 
     [Command]
-    private void CmdPlayerShoot(string playerName)
+    private void CmdPlayerShoot(string playerId, float damage)
     {
-        Debug.Log(playerName + "a été touché.");
+        Debug.Log(playerId + "a été touché.");
+
+        Player player = GameManager.GetPlayer(playerId);
+        player.TakeDamage(damage);
     }
 }
