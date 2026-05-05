@@ -1,6 +1,5 @@
 using UnityEngine;
 using Mirror;
-using Mirror.Examples.AdditiveScenes;
 public class PlayerShoot : NetworkBehaviour
 {
 
@@ -37,7 +36,10 @@ public class PlayerShoot : NetworkBehaviour
         RaycastHit hit;
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
         {
-            CmdPlayerShoot(hit.transform.name, weapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
+            if(hit.collider.tag == "Player")
+            {
+                CmdPlayerShoot(hit.transform.name, weapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
+            }
         }
     }
 
@@ -47,6 +49,6 @@ public class PlayerShoot : NetworkBehaviour
         Debug.Log(playerId + "a été touché.");
 
         Player player = GameManager.GetPlayer(playerId);
-        player.TakeDamage(damage);
+        player.RpcTakeDamage(damage);
     }
 }

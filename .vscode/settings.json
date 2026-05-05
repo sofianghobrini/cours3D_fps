@@ -67,5 +67,6 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "Cours3d_FPS.slnx"
+    "dotnet.defaultSolution": "Cours3d_FPS.slnx",
+    "git.ignoreLimitWarning": true
 }

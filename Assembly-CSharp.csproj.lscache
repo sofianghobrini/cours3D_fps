@@ -52,6 +52,7 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 [sourceFiles]
 Assets/Scripts/
  GameManager.cs
+ MatchSettings.cs
  Player/
   Player.cs
   PlayerController.cs
