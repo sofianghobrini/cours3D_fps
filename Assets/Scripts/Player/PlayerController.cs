@@ -4,6 +4,7 @@ using UnityEngine;
 //Les RequireComponent ne sont pas obligatoires, mais ils permettent de s'assurer que les composants nécessaires sont attachés à l'objet du joueur.
 [RequireComponent(typeof(PlayerMotor))]
 [RequireComponent(typeof(ConfigurableJoint))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
     
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
 
    [SerializeField]
    private float thrustForce = 1000f;
+
+    
+
    [Header("Joint Settings")] //Permet de séparer les paramètres pour le rendre plus lisible dans l'inspecteur de Unity
    [SerializeField]
    private float jointSpring = 20f;
@@ -28,10 +32,12 @@ public class PlayerController : MonoBehaviour
    private PlayerMotor motor;
 
    private ConfigurableJoint joint;
+   private Animator animator;
 
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        animator = GetComponent<Animator>();
         joint = GetComponent<ConfigurableJoint>();
         SetJointSettings(jointSpring);
     }
@@ -47,6 +53,9 @@ public class PlayerController : MonoBehaviour
         Vector3 moveVertical = transform.forward * zMov;
 
         Vector3 velocity = (moveHorizontal + moveVertical).normalized * speed;
+
+        // Joue l'animation
+        animator.SetFloat("ForwardVelocity", zMov);
 
         motor.Move(velocity);
 

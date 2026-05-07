@@ -50,17 +50,19 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 /warnaserror+:NU1605
 
 [sourceFiles]
-Assets/Scripts/
- GameManager.cs
- MatchSettings.cs
- Player/
-  Player.cs
-  PlayerController.cs
-  PlayerMotor.cs
-  PlayerSetup.cs
-  PlayerShoot.cs
-  PlayerWeapon.cs
-Assets/TutorialInfo/Scripts/Readme.cs
+Assets/
+ ParticleSystems/Scripts/AfterburnerPhysicsForce.cs
+ Scripts/
+  GameManager.cs
+  MatchSettings.cs
+  Player/
+   Player.cs
+   PlayerController.cs
+   PlayerMotor.cs
+   PlayerSetup.cs
+   PlayerShoot.cs
+   PlayerWeapon.cs
+ TutorialInfo/Scripts/Readme.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
