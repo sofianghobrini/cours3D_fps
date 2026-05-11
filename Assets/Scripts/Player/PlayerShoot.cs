@@ -3,7 +3,14 @@ using Mirror;
 public class PlayerShoot : NetworkBehaviour
 {
 
-    public PlayerWeapon weapon;
+    [SerializeField]
+    private PlayerWeapon weapon;
+
+    [SerializeField]
+    private GameObject weaponGFX;
+
+    [SerializeField]
+    private string weaponLayerName = "Weapon";
 
     [SerializeField]
     private Camera cam;
@@ -18,6 +25,8 @@ public class PlayerShoot : NetworkBehaviour
             Debug.LogError("PlayerShoot: No camera referenced!");
             this.enabled = false; // Désactive ce script si la caméra n'est pas assignée
         }
+
+        weaponGFX.layer = LayerMask.NameToLayer(weaponLayerName); // Assigne la couche spécifiée au modèle de l'arme
     }
 
     private void Update()
