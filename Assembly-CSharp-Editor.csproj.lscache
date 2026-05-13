@@ -354,6 +354,7 @@ Library/PackageCache/
   Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
 Library/ScriptAssemblies/
  PPv2URPConverters.dll
+ Unity.2D.Sprite.Editor.dll
  Unity.AI.Navigation.dll
  Unity.AI.Navigation.Editor.ConversionSystem.dll
  Unity.AI.Navigation.Editor.dll

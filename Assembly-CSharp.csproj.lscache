@@ -52,8 +52,10 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 [sourceFiles]
 Assets/
  ParticleSystems/Scripts/AfterburnerPhysicsForce.cs
- Scripts/
+ Scripts/Managers/
   GameManager.cs
+  WeaponManager.cs
+ Scripts/
   MatchSettings.cs
   Player/
    Player.cs

@@ -1,22 +1,20 @@
 using UnityEngine;
 using Mirror;
+
+[RequireComponent(typeof(WeaponManager))]
 public class PlayerShoot : NetworkBehaviour
 {
 
-    [SerializeField]
-    private PlayerWeapon weapon;
+    private PlayerWeapon currentWeapon;
 
-    [SerializeField]
-    private GameObject weaponGFX;
-
-    [SerializeField]
-    private string weaponLayerName = "Weapon";
 
     [SerializeField]
     private Camera cam;
 
     [SerializeField]
     private LayerMask mask; // Permet de spécifier les couches sur lesquelles le tir peut interagir
+    
+    private WeaponManager weaponManager;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -26,28 +24,48 @@ public class PlayerShoot : NetworkBehaviour
             this.enabled = false; // Désactive ce script si la caméra n'est pas assignée
         }
 
-        weaponGFX.layer = LayerMask.NameToLayer(weaponLayerName); // Assigne la couche spécifiée au modèle de l'arme
+        weaponManager = GetComponent<WeaponManager>();
     }
 
     private void Update()
     {
-        if(Input.GetButtonDown("Fire1"))
+        currentWeapon = weaponManager.GetCurrentWeapon();
+        
+
+        if(currentWeapon.fireRate <= 0f)
         {
-            Shoot();
+            if(Input.GetButtonDown("Fire1"))
+            {
+                Shoot();
+            }
+        }
+        else
+        {
+            if(Input.GetButton("Fire1") )
+            {
+                InvokeRepeating("Shoot", 0f, 1f / currentWeapon.fireRate); // Appelle la fonction Shoot à une cadence définie par fireRate
+            }
+            else if(Input.GetButtonUp("Fire1"))
+            {
+                CancelInvoke("Shoot"); // Arrête d'appeler la fonction Shoot lorsque le bouton de tir est relâché
+            }
         }
     }
+    
+
 
 
 
     [Client]
     private void Shoot()
     {
+        Debug.Log("Piou piou.");
         RaycastHit hit;
-        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, weapon.range, mask))
+        if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
             if(hit.collider.tag == "Player")
             {
-                CmdPlayerShoot(hit.transform.name, weapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
+                CmdPlayerShoot(hit.transform.name, currentWeapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
             }
         }
     }
