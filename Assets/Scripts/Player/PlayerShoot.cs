@@ -53,20 +53,58 @@ public class PlayerShoot : NetworkBehaviour
     }
     
 
+    [Command]
+    void CmdOnHit(Vector3 pos, Vector3 normal)
+    {
+        RpcDoHitEffect(pos, normal);
+    }
+
+    [ClientRpc]
+    void RpcDoHitEffect(Vector3 pos, Vector3 normal)
+    {
+        // Ici, vous pouvez instancier des effets d'impact à la position donnée
+        GameObject impactEffect = Instantiate(weaponManager.GetCurrentGraphics().impactEffect, pos, Quaternion.LookRotation(normal));
+        Destroy(impactEffect, 2f); // Détruit l'effet d'impact après 2 secondes pour éviter l'accumulation d'objets dans la scène
+    }
 
 
+
+    //Fonction appelée sur le serveur pour indiquer que le joueur a tiré
+    [Command]
+    void CmdOnShoot()
+    {
+        RpcDoShootEffect();
+    }
+
+
+    //Fonction appelée sur tous les clients pour jouer les effets de tir
+    [ClientRpc]
+    void RpcDoShootEffect()
+    {
+        weaponManager.GetCurrentGraphics().muzzleFlash.Play(); // Joue l'effet de flash de bouche sur tous les clients
+    }
 
     [Client]
     private void Shoot()
     {
-        Debug.Log("Piou piou.");
+        //Debug.Log("Piou piou.");
+        if(!isLocalPlayer)
+        {
+            return;
+        }
+        
+        CmdOnShoot();
+
         RaycastHit hit;
+        
         if(Physics.Raycast(cam.transform.position, cam.transform.forward, out hit, currentWeapon.range, mask))
         {
             if(hit.collider.tag == "Player")
             {
                 CmdPlayerShoot(hit.transform.name, currentWeapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
             }
+
+            CmdOnHit(hit.point, hit.normal); // Envoie une commande au serveur pour indiquer qu'un impact a eu lieu
         }
     }
 

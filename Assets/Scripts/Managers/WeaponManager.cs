@@ -9,6 +9,7 @@ public class WeaponManager : NetworkBehaviour
     private PlayerWeapon primaryWeapon;
 
     private PlayerWeapon currentWeapon;
+    private WeaponGraphics currentGraphics;
 
     [SerializeField]
     private Transform weaponHolder;
@@ -29,9 +30,17 @@ public class WeaponManager : NetworkBehaviour
         GameObject weaponIns = Instantiate(_weapon.graphics, weaponHolder.position, weaponHolder.rotation, weaponHolder);
         weaponIns.transform.SetParent(weaponHolder);
 
+
+        currentGraphics = weaponIns.GetComponent<WeaponGraphics>();
+
+        if(currentGraphics == null)
+        {
+            Debug.LogError("WeaponManager: No WeaponGraphics component found on the weapon prefab!");
+        }
+
         if(isLocalPlayer)
         {
-            SetLayerRecursively(weaponIns, LayerMask.NameToLayer(weaponLayerName));
+            Util.SetLayerRecursively(weaponIns, LayerMask.NameToLayer(weaponLayerName));
         }
     }
 
@@ -39,14 +48,11 @@ public class WeaponManager : NetworkBehaviour
     {
         return currentWeapon;
     }
-
-    private void SetLayerRecursively(GameObject obj, int newLayer)
+    public WeaponGraphics GetCurrentGraphics()
     {
-        obj.layer = newLayer;
-
-        foreach (Transform child in obj.transform)
-        {
-            SetLayerRecursively(child.gameObject, newLayer);
-        }
+        return currentGraphics;
     }
+
+
+
 }

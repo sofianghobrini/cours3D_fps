@@ -39,7 +39,7 @@ public class PlayerSetup : NetworkBehaviour
             }
 
             //Desactive les graphics du joueur local pour eviter les bugs de camera
-            SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+            Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
 
             //Instancie le UI du joueur local
             playerUIInstance = Instantiate(playerUIPrefab);      
@@ -48,15 +48,6 @@ public class PlayerSetup : NetworkBehaviour
         GetComponent<Player>().Setup();
     }
 
-    private void SetLayerRecursively(GameObject obj, int newLayer)
-    {
-        obj.layer = newLayer;
-
-        foreach (Transform child in obj.transform)
-        {
-            SetLayerRecursively(child.gameObject, newLayer);
-        }
-    }
 
     public override void OnStartClient()
     {
