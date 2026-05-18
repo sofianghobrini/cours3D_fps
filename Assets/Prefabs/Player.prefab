@@ -797,6 +797,8 @@ MonoBehaviour:
   mouseSensitivityX: 3
   mouseSensitivityY: 10
   thrustForce: 1000
+  jetpackFuelBurnSpeed: 1
+  jetpackFuelRegenSpeed: 0.5
   jointSpring: 20
   jointMaxForce: 40
 --- !u!114 &660615553846559182
@@ -1253,6 +1255,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 13500000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1328,6 +1334,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 13500000, guid: d8c41be67f41aa545ae053b0b927f821, type: 3}
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}

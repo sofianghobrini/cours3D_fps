@@ -63,6 +63,7 @@ Assets/
    PlayerMotor.cs
    PlayerSetup.cs
    PlayerShoot.cs
+   PlayerUI.cs
    PlayerWeapon.cs
   Util.cs
   WeaponGraphics.cs
