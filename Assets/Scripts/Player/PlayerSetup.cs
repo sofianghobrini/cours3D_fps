@@ -20,11 +20,10 @@ public class PlayerSetup : NetworkBehaviour
 
     [SerializeField]
     private GameObject playerUIPrefab;
-    private GameObject playerUIInstance;
 
+    [HideInInspector]
+    public GameObject playerUIInstance;
 
-
-    Camera sceneCamera;
 
     //Permet de desactiver les joueurs qui joue sur leurs propres pc ou console
     private void Start(){
@@ -35,11 +34,6 @@ public class PlayerSetup : NetworkBehaviour
         }
         else
         {
-            sceneCamera = Camera.main;
-            if (sceneCamera != null)
-            {
-                sceneCamera.gameObject.SetActive(false);
-            }
 
             //Desactive les graphics du joueur local pour eviter les bugs de camera
             Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
@@ -88,10 +82,8 @@ public class PlayerSetup : NetworkBehaviour
 
     private void OnDisable(){
         Destroy(playerUIInstance);
-        if (sceneCamera != null)
-        {
-            sceneCamera.gameObject.SetActive(true);
-        }
+
+        GameManager.instance.SetSceneCameraActive(true);
 
         GameManager.UnregisterPlayer(transform.name); 
     }

@@ -2,6 +2,8 @@ using UnityEngine;
 using Mirror;
 using System.Collections;
 
+
+[RequireComponent(typeof(PlayerSetup))]
 public class Player : NetworkBehaviour
 {
     [SyncVar]
@@ -21,7 +23,18 @@ public class Player : NetworkBehaviour
 
     [SerializeField]
     private Behaviour[] disableOnDeath;
+
+
+    [SerializeField]
+    private GameObject[] disableOnGameObjectsOnDeath;
     private bool[] wasEnabledOnStart;
+
+    [SerializeField]
+    private GameObject deathEffect;
+
+    [SerializeField]
+    private GameObject respawnEffect;
+
 
     public void Setup()
     {
@@ -45,21 +58,42 @@ public class Player : NetworkBehaviour
             disableOnDeath[i].enabled = wasEnabledOnStart[i];
         }
 
+        // réactive les GameObjects spécifiés dans disableOnGameObjectsOnDeath pour simuler la mort du joueur
+        for (int i = 0; i < disableOnGameObjectsOnDeath.Length; i++)
+        {
+            disableOnGameObjectsOnDeath[i].SetActive(true);
+        }
+
+
+        // Réactive le collider du joueur pour permettre les interactions physiques après la réapparition
         Collider col = GetComponent<Collider>();
         if (col != null)
         {
             col.enabled = true;
         }
+
+        // Change la caméra pour le joueur local après sa mort
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(false);
+            GetComponent<PlayerSetup>().playerUIInstance.SetActive(true); // Désactive l'UI du joueur local après sa mort
+        }
+
+        //Apparit une particule d'effet de mort à la position du joueur
+        GameObject _gfxIns = Instantiate(respawnEffect, transform.position, Quaternion.identity);
+        Destroy(_gfxIns, 3f);
     }
 
     private IEnumerator Respawn()
     {
         yield return new WaitForSeconds(GameManager.instance.matchSettings.respawnTimer);
 
-        SetDefaults();
+        
         Transform spawnPoint = NetworkManager.singleton.GetStartPosition();
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
+
+        SetDefaults();
     }
 
 
@@ -96,19 +130,40 @@ public class Player : NetworkBehaviour
     private void Die()
     {
         isDead = true;
-
+        // Désactive les composants spécifiés dans disableOnDeath pour simuler la mort du joueur
         for (int i = 0; i < disableOnDeath.Length; i++)
         {
             disableOnDeath[i].enabled = false;
         }
+
+
+        // Désactive les GameObjects spécifiés dans disableOnGameObjectsOnDeath pour simuler la mort du joueur
+        for (int i = 0; i < disableOnGameObjectsOnDeath.Length; i++)
+        {
+            disableOnGameObjectsOnDeath[i].SetActive(false);
+        }
+
+        //Désactive le collider du joueur pour éviter les interactions physiques après la mort
         Collider col = GetComponent<Collider>();
         if (col != null)        
         {
             col.enabled = false;
         }
-        Debug.Log(transform.name + " est mort.");
 
-        StartCoroutine(Respawn());
+        //Apparit une particule d'effet de mort à la position du joueur
+        GameObject _gfxIns = Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(_gfxIns, 3f); // Détruit l'effet de mort après 3 secondes pour éviter d'encombrer la scène
+
+        Debug.Log(transform.name + " est mort.");
+        
+
+        // Change la caméra pour le joueur local après sa mort
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(true); // Désactive la caméra de la scène pour le joueur local après sa mort
+            GetComponent<PlayerSetup>().playerUIInstance.SetActive(false); // Désactive l'UI du joueur local après sa mort
+            StartCoroutine(Respawn());
+        }
     }
 
 }
