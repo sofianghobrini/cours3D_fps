@@ -1099,7 +1099,7 @@ MonoBehaviour:
     weaponName: Submachine Gun
     damage: 5
     range: 100
-    fireRate: 10
+    fireRate: 3
     graphics: {fileID: 3052563103665847783, guid: 8086378e749804b49bf7596d1922e4d8, type: 3}
   weaponHolder: {fileID: 6230816173239927573}
   weaponLayerName: Weapon

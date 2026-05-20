@@ -49,10 +49,13 @@ public class PlayerSetup : NetworkBehaviour
             else
             {
                 ui.SetController(GetComponent<PlayerController>()); // Associe le PlayerController au PlayerUI pour permettre la mise à jour de l'interface utilisateur
-            }    
+            } 
+
+
+            GetComponent<Player>().Setup();  
         }
 
-        GetComponent<Player>().Setup();
+        
     }
 
 
@@ -83,7 +86,12 @@ public class PlayerSetup : NetworkBehaviour
     private void OnDisable(){
         Destroy(playerUIInstance);
 
-        GameManager.instance.SetSceneCameraActive(true);
+
+        if (isLocalPlayer)
+        {
+            GameManager.instance.SetSceneCameraActive(true);
+        }
+        
 
         GameManager.UnregisterPlayer(transform.name); 
     }

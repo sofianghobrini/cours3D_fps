@@ -1,6 +1,7 @@
 using UnityEngine;
 using Mirror;
 using System.Collections;
+using NUnit.Framework;
 
 
 [RequireComponent(typeof(PlayerSetup))]
@@ -35,13 +36,38 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject respawnEffect;
 
+    private bool firstSetup = true;
 
     public void Setup()
     {
-        wasEnabledOnStart = new bool[disableOnDeath.Length];
-        for (int i = 0; i < disableOnDeath.Length; i++)
+        if(isLocalPlayer)
         {
-            wasEnabledOnStart[i] = disableOnDeath[i].enabled;
+            GameManager.instance.SetSceneCameraActive(false); // Désactive la caméra de la scène pour le joueur local après sa mort
+            GetComponent<PlayerSetup>().playerUIInstance.SetActive(true); // Désactive l'UI du joueur local après sa mort
+        }
+        
+
+        CmdBroadCastNewPlayerSetup();
+    }
+
+    [Command(requiresAuthority = true)] // Permet d'appeler cette méthode depuis un client vers le serveur, même si le client n'a pas l'autorité sur cet objet
+    private void CmdBroadCastNewPlayerSetup()
+    {
+        RpcSetupPlayerOnAllClients();
+    }
+
+
+    [ClientRpc]
+    private void RpcSetupPlayerOnAllClients()
+    {
+        if(firstSetup)
+        {
+            wasEnabledOnStart = new bool[disableOnDeath.Length];
+            for (int i = 0; i < disableOnDeath.Length; i++)
+            {
+                wasEnabledOnStart[i] = disableOnDeath[i].enabled;
+            }
+            firstSetup = false;
         }
 
         SetDefaults();
@@ -72,12 +98,7 @@ public class Player : NetworkBehaviour
             col.enabled = true;
         }
 
-        // Change la caméra pour le joueur local après sa mort
-        if (isLocalPlayer)
-        {
-            GameManager.instance.SetSceneCameraActive(false);
-            GetComponent<PlayerSetup>().playerUIInstance.SetActive(true); // Désactive l'UI du joueur local après sa mort
-        }
+
 
         //Apparit une particule d'effet de mort à la position du joueur
         GameObject _gfxIns = Instantiate(respawnEffect, transform.position, Quaternion.identity);
@@ -93,7 +114,9 @@ public class Player : NetworkBehaviour
         transform.position = spawnPoint.position;
         transform.rotation = spawnPoint.rotation;
 
-        SetDefaults();
+        yield return new WaitForSeconds(0.1f);
+
+        Setup();
     }
 
 

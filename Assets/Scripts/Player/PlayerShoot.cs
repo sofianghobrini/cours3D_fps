@@ -29,6 +29,10 @@ public class PlayerShoot : NetworkBehaviour
 
     private void Update()
     {
+        if(!isLocalPlayer)
+        {
+            return;
+        }
         currentWeapon = weaponManager.GetCurrentWeapon();
         
 
