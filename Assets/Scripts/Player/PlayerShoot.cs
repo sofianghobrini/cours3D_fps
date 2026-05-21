@@ -29,6 +29,11 @@ public class PlayerShoot : NetworkBehaviour
 
     private void Update()
     {
+        if(PauseMenu.isOn)
+        {
+            return;
+        }
+        
         if(!isLocalPlayer)
         {
             return;
