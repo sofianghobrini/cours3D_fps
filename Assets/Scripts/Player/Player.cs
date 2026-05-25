@@ -22,6 +22,10 @@ public class Player : NetworkBehaviour
     [SyncVar] // Permet de synchroniser cette variable entre le serveur et les clients  
     private float currentHealth;
 
+    public int kills;
+    public int deaths;
+
+
     [SerializeField]
     private Behaviour[] disableOnDeath;
 
@@ -129,13 +133,13 @@ public class Player : NetworkBehaviour
 
         if(Input.GetKeyDown(KeyCode.K))
         {
-            RpcTakeDamage(45f);
+            RpcTakeDamage(45f, "Test");
         }
     }
 
 
     [ClientRpc] // Permet d'appeler cette méthode sur tous les clients depuis le serveur
-    public void RpcTakeDamage(float amount)
+    public void RpcTakeDamage(float amount, string sourceId)
     {
         if (isDead)
         {
@@ -146,13 +150,22 @@ public class Player : NetworkBehaviour
         Debug.Log(transform.name + " a " + currentHealth + " points de vie restants.");
         if(currentHealth <= 0 && !isDead)
         {
-            Die();
+            Die(sourceId);
         }
     }
     
-    private void Die()
+    private void Die(string sourceId)
     {
         isDead = true;
+
+        Player sourcePlayer = GameManager.GetPlayerId(sourceId);
+        if(sourcePlayer != null)
+        {
+            sourcePlayer.kills++;
+        }
+
+        deaths++;
+
         // Désactive les composants spécifiés dans disableOnDeath pour simuler la mort du joueur
         for (int i = 0; i < disableOnDeath.Length; i++)
         {

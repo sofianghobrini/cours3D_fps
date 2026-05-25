@@ -93,6 +93,6 @@ public class PlayerSetup : NetworkBehaviour
         }
         
 
-        GameManager.UnregisterPlayer(transform.name); 
+        GameManager.UnregisterPlayerId(transform.name); 
     }
 }

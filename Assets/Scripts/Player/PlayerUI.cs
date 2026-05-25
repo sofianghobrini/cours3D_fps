@@ -10,7 +10,10 @@ public class PlayerUI : MonoBehaviour
 
 
     [SerializeField]
-    private GameObject pauseMenu; 
+    private GameObject pauseMenu;
+
+    [SerializeField]
+    private GameObject scoreBoard; 
 
 
     private void SetFuelAmount(float amount)
@@ -33,6 +36,17 @@ public class PlayerUI : MonoBehaviour
             // Affiche ou masque le menu de pause
             // Vous pouvez implémenter la logique pour afficher un menu de pause ici
             TogglePauseMenu();
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            // Affiche ou masque le tableau des scores
+            scoreBoard.SetActive(true);
+        }
+        else if (Input.GetKeyUp(KeyCode.Tab))
+        {
+            scoreBoard.SetActive(false);
         }
     }
 

@@ -110,7 +110,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             if(hit.collider.tag == "Player")
             {
-                CmdPlayerShoot(hit.transform.name, currentWeapon.damage); // Envoie une commande au serveur pour indiquer que le joueur a été touché
+                CmdPlayerShoot(hit.transform.name, currentWeapon.damage, transform.name); // Envoie une commande au serveur pour indiquer que le joueur a été touché
             }
 
             CmdOnHit(hit.point, hit.normal); // Envoie une commande au serveur pour indiquer qu'un impact a eu lieu
@@ -118,11 +118,11 @@ public class PlayerShoot : NetworkBehaviour
     }
 
     [Command]
-    private void CmdPlayerShoot(string playerId, float damage)
+    private void CmdPlayerShoot(string playerId, float damage, string sourceId)
     {
         Debug.Log(playerId + "a été touché.");
 
-        Player player = GameManager.GetPlayer(playerId);
-        player.RpcTakeDamage(damage);
+        Player player = GameManager.GetPlayerId(playerId);
+        player.RpcTakeDamage(damage, sourceId);
     }
 }

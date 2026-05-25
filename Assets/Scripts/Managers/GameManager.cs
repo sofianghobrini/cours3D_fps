@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 public class GameManager : MonoBehaviour
 {
     private const string playerIdPrefix = "Player";
@@ -40,14 +41,19 @@ public class GameManager : MonoBehaviour
         player.transform.name = playerId;
     }
 
-    public static void UnregisterPlayer(string playerId)
+    public static void UnregisterPlayerId(string playerId)
     {
         players.Remove(playerId);
     }
 
-    public static Player GetPlayer(string playerId)
+    public static Player GetPlayerId(string playerId)
     {
         return players[playerId];
+    }
+
+    public static Player[] GetAllPlayers()
+    {
+        return players.Values.ToArray();
     }
 
     /*private void OnGUI()
