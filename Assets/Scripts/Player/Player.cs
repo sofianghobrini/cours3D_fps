@@ -147,7 +147,7 @@ public class Player : NetworkBehaviour
         }
             
         currentHealth -= amount;
-        Debug.Log(transform.name + " a " + currentHealth + " points de vie restants.");
+        //Debug.Log(transform.name + " a " + currentHealth + " points de vie restants.");
         if(currentHealth <= 0 && !isDead)
         {
             Die(sourceId);
@@ -159,11 +159,27 @@ public class Player : NetworkBehaviour
         isDead = true;
 
         Player sourcePlayer = GameManager.GetPlayerId(sourceId);
+        
+
         if(sourcePlayer != null)
         {
             sourcePlayer.kills++;
+            if(GameManager.instance.onPlayerKilledCallback != null)
+            {
+                if (isServer)
+                {
+                    GameManager.instance.onPlayerKilledCallback(transform.name, sourcePlayer.transform.name);
+                }
+            }
+            else
+            {
+                Debug.LogError("GameManager instance onPlayerKilledCallback est null !");
+            }
         }
 
+        
+
+        
         deaths++;
 
         // Désactive les composants spécifiés dans disableOnDeath pour simuler la mort du joueur
