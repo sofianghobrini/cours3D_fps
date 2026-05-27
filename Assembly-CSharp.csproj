@@ -49,27 +49,27 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.3.10f1\Editor\Data\Tools\BuildPipeline\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Player\PlayerWeapon.cs" />
+    <Compile Include="Assets\Scripts\Weapons\WeaponGraphics.cs" />
     <Compile Include="Assets\Scripts\KillFeedItem.cs" />
     <Compile Include="Assets\Scripts\Managers\GameManager.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerShoot.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerSetup.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerScoreBoardItem.cs" />
-    <Compile Include="Assets\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
-    <Compile Include="Assets\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
     <Compile Include="Assets\Scripts\Util.cs" />
     <Compile Include="Assets\Scripts\PauseMenu.cs" />
-    <Compile Include="Assets\Scripts\WeaponGraphics.cs" />
+    <Compile Include="Assets\Imports\ParticleSystems\Scripts\ExplosionPhysicsForce.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMotor.cs" />
     <Compile Include="Assets\Scripts\KillFeed.cs" />
-    <Compile Include="Assets\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerUI.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\Scripts\ScoreBoard.cs" />
+    <Compile Include="Assets\Imports\ParticleSystems\Scripts\ParticleSystemMultiplier.cs" />
     <Compile Include="Assets\Scripts\Managers\WeaponManager.cs" />
     <Compile Include="Assets\Scripts\Player\Player.cs" />
+    <Compile Include="Assets\Scripts\Weapons\WeaponData.cs" />
     <Compile Include="Assets\Scripts\MatchSettings.cs" />
+    <Compile Include="Assets\Imports\ParticleSystems\Scripts\AfterburnerPhysicsForce.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.dll" />
@@ -83,8 +83,9 @@
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\Mono.CecilX.Rocks.dll" />
     <None Include="Assets\Mirror\Readme.txt" />
     <None Include="Assets\ScriptTemplates\57-Mirror__Network Transform-NewNetworkTransform.cs.txt" />
-    <None Include="Assets\multiplayer-fps-assets\README.txt" />
+    <None Include="Assets\Imports\multiplayer-fps-assets\README.txt" />
     <None Include="Assets\ScriptTemplates\52-Mirror__Network Behaviour-NewNetworkBehaviour.cs.txt" />
+    <None Include="Assets\Imports\Standard Assets\ExplosionAndFireworksParticleSystems\ParticleSystemsGuidelines.txt" />
     <None Include="Assets\Mirror\Plugins\Mono.Cecil\License.txt" />
     <None Include="Assets\ScriptTemplates\55-Mirror__Network Room Player-NewNetworkRoomPlayer.cs.txt" />
     <None Include="Assets\ScriptTemplates\54-Mirror__Custom Interest Management-CustomInterestManagement.cs.txt" />

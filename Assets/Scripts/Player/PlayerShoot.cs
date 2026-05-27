@@ -5,7 +5,7 @@ using Mirror;
 public class PlayerShoot : NetworkBehaviour
 {
 
-    private PlayerWeapon currentWeapon;
+    private WeaponData currentWeapon;
 
 
     [SerializeField]

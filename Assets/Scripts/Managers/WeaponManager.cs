@@ -6,9 +6,9 @@ public class WeaponManager : NetworkBehaviour
 {
 
     [SerializeField]
-    private PlayerWeapon primaryWeapon;
+    private WeaponData primaryWeapon;
 
-    private PlayerWeapon currentWeapon;
+    private WeaponData currentWeapon;
     private WeaponGraphics currentGraphics;
 
     [SerializeField]
@@ -23,7 +23,7 @@ public class WeaponManager : NetworkBehaviour
         EquipWeapon(primaryWeapon);
     }
 
-    void EquipWeapon(PlayerWeapon _weapon)
+    void EquipWeapon(WeaponData _weapon)
     {
         currentWeapon = _weapon;
 
@@ -44,7 +44,7 @@ public class WeaponManager : NetworkBehaviour
         }
     }
 
-    public PlayerWeapon GetCurrentWeapon()
+    public WeaponData GetCurrentWeapon()
     {
         return currentWeapon;
     }

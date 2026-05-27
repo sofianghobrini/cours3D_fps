@@ -1,8 +1,8 @@
 
 using UnityEngine;
 
-[System.Serializable] // Permet de rendre cette classe visible et éditable dans l'inspecteur de Unity
-public class PlayerWeapon
+[CreateAssetMenu(fileName = "weaponData", menuName = "My game/Weapon Data")]
+public class WeaponData : ScriptableObject    
 {
     public string weaponName = "Submachine Gun";
     public float damage = 10f;
