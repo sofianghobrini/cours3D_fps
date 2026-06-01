@@ -29,8 +29,15 @@ public class PlayerShoot : NetworkBehaviour
 
     private void Update()
     {
+        currentWeapon = weaponManager.GetCurrentWeapon();
         if(PauseMenu.isOn)
         {
+            return;
+        }
+
+        if(Input.GetKeyDown(KeyCode.R) && weaponManager.currentAmmoSize < currentWeapon.maxAmmo)
+        {
+            StartCoroutine(weaponManager.Reload());
             return;
         }
         
@@ -38,7 +45,7 @@ public class PlayerShoot : NetworkBehaviour
         {
             return;
         }
-        currentWeapon = weaponManager.GetCurrentWeapon();
+        
         
 
         if(currentWeapon.fireRate <= 0f)
@@ -97,10 +104,20 @@ public class PlayerShoot : NetworkBehaviour
     private void Shoot()
     {
         //Debug.Log("Piou piou.");
-        if(!isLocalPlayer)
+        if(!isLocalPlayer || weaponManager.IsReloading)
         {
             return;
         }
+
+
+        if(weaponManager.currentAmmoSize <= 0)
+        {
+            StartCoroutine(weaponManager.Reload());
+            return;
+        }
+
+        weaponManager.currentAmmoSize--;
+        Debug.Log("Munitions restantes: " + weaponManager.currentAmmoSize);
         
         CmdOnShoot();
 

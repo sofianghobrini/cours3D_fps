@@ -4845,6 +4845,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4796636059319811091}
   - component: {fileID: 6877971429938282770}
+  - component: {fileID: 2878514581600013329}
   m_Layer: 0
   m_Name: SCF-I Automatic
   m_TagString: Untagged
@@ -4883,6 +4884,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   muzzleFlash: {fileID: 4226422310178803902}
   impactEffect: {fileID: 210548441158728061, guid: 0b3cc7b52e458c64a8b7b299ab766e08, type: 3}
+--- !u!95 &2878514581600013329
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052563103665847783}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 579158d807687c7428a63bc42f09e139, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3772912382016421091
 GameObject:
   m_ObjectHideFlags: 0

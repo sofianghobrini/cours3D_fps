@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
   weaponName: Submachine Gun
-  damage: 10
-  range: 100
+  damage: 3
+  range: 15
   fireRate: 0
-  graphics: {fileID: 0}
+  maxAmmo: 30
+  reloadTime: 1.5
+  graphics: {fileID: 3474554782421057386, guid: 401c0f9b86bf0734da538f2ba2f49110, type: 3}

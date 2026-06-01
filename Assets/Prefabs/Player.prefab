@@ -1097,9 +1097,11 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  primaryWeapon: {fileID: 11400000, guid: 76ce2c2ebb40aa6408920e52f2b865a4, type: 2}
+  primaryWeapon: {fileID: 11400000, guid: 10e469fdbfbb09241976d82993508bb5, type: 2}
   weaponHolder: {fileID: 6230816173239927573}
   weaponLayerName: Weapon
+  currentAmmoSize: 0
+  IsReloading: 0
 --- !u!1 &8554938047128773907
 GameObject:
   m_ObjectHideFlags: 0

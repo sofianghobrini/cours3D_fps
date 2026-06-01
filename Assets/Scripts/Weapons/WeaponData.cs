@@ -9,5 +9,8 @@ public class WeaponData : ScriptableObject
     public float range = 100f;
 
     public float fireRate = 0f;
+
+    public int maxAmmo = 30;
+    public float reloadTime = 2f;
     public GameObject graphics;
 }
