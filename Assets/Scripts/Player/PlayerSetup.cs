@@ -48,7 +48,7 @@ public class PlayerSetup : NetworkBehaviour
             }
             else
             {
-                ui.SetController(GetComponent<PlayerController>()); // Associe le PlayerController au PlayerUI pour permettre la mise à jour de l'interface utilisateur
+                ui.SetPlayer(GetComponent<Player>()); // Associe le Player au PlayerUI pour permettre la mise à jour de l'interface utilisateur
             } 
 
 

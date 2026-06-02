@@ -22,6 +22,11 @@ public class Player : NetworkBehaviour
     [SyncVar] // Permet de synchroniser cette variable entre le serveur et les clients  
     private float currentHealth;
 
+    public float GetHealthPct()
+    {
+        return currentHealth / maxHealth; // Retourne le pourcentage de santé actuel du joueur
+    }
+
     public int kills;
     public int deaths;
 
