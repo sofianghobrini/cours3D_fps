@@ -27,6 +27,9 @@ public class Player : NetworkBehaviour
         return currentHealth / maxHealth; // Retourne le pourcentage de santé actuel du joueur
     }
 
+    [SyncVar]
+    public string username = "Player";
+
     public int kills;
     public int deaths;
 
@@ -173,7 +176,7 @@ public class Player : NetworkBehaviour
             {
                 if (isServer)
                 {
-                    GameManager.instance.onPlayerKilledCallback(transform.name, sourcePlayer.transform.name);
+                    GameManager.instance.onPlayerKilledCallback(username, sourcePlayer.username);
                 }
             }
             else

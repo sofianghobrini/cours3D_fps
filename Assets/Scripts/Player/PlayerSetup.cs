@@ -26,7 +26,8 @@ public class PlayerSetup : NetworkBehaviour
 
 
     //Permet de desactiver les joueurs qui joue sur leurs propres pc ou console
-    private void Start(){
+    private void Start()
+    {
         if(!isLocalPlayer){
             DisableComponents();
             //On desactive la camera de la scene pour les autres joueurs
@@ -52,10 +53,26 @@ public class PlayerSetup : NetworkBehaviour
             } 
 
 
-            GetComponent<Player>().Setup();  
+            GetComponent<Player>().Setup(); 
+
+
+            string username = UserAccountManager.LoggedInUsername;
+
+            CmdSetUsername(transform.name, username); 
         }
 
         
+    }
+
+    [Command]
+    private void CmdSetUsername(string playerId, string _username)
+    {
+        Player player = GameManager.GetPlayerId(playerId);
+        if (player != null)
+        {
+            Debug.Log(_username + " a rejoint la partie.");
+            player.username = _username;
+        }
     }
 
 

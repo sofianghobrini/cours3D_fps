@@ -12,7 +12,7 @@ public class PlayerScoreBoardItem : MonoBehaviour
 
     public void setup(Player player)
     {
-        playerNameText.text = player.name;
+        playerNameText.text = player.username;
         playerKillsText.text = player.kills.ToString();
         playerDeathsText.text = player.deaths.ToString();
     }
