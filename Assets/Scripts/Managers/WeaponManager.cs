@@ -30,7 +30,7 @@ public class WeaponManager : NetworkBehaviour
         EquipWeapon(primaryWeapon);
     }
 
-    void EquipWeapon(WeaponData _weapon)
+    public void EquipWeapon(WeaponData _weapon)
     {
         currentWeapon = _weapon;
         currentAmmoSize = _weapon.maxAmmo;

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c8a2986d1750c147903ee34c3d45670, type: 3}
   m_Name: Pistol
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  weaponName: Submachine Gun
+  weaponName: Pistol
   damage: 3
   range: 15
   fireRate: 0

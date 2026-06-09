@@ -18,6 +18,11 @@ public class PlayerSetup : NetworkBehaviour
     [SerializeField]
     private GameObject playerGraphics;
 
+
+    [SerializeField]
+    private GameObject playerNamePlatesGraphics;
+
+
     [SerializeField]
     private GameObject playerUIPrefab;
 
@@ -38,6 +43,7 @@ public class PlayerSetup : NetworkBehaviour
 
             //Desactive les graphics du joueur local pour eviter les bugs de camera
             Util.SetLayerRecursively(playerGraphics, LayerMask.NameToLayer(dontDrawLayerName));
+            Util.SetLayerRecursively(playerNamePlatesGraphics, LayerMask.NameToLayer(dontDrawLayerName));
 
             //Instancie le UI du joueur local
             playerUIInstance = Instantiate(playerUIPrefab); 
