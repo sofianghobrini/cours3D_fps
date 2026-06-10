@@ -13,4 +13,7 @@ public class WeaponData : ScriptableObject
     public int maxAmmo = 30;
     public float reloadTime = 2f;
     public GameObject graphics;
+
+    public AudioClip shootSound;
+    public AudioClip reloadSound;
 }

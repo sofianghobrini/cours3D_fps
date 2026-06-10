@@ -98,6 +98,9 @@ public class PlayerShoot : NetworkBehaviour
     void RpcDoShootEffect()
     {
         weaponManager.GetCurrentGraphics().muzzleFlash.Play(); // Joue l'effet de flash de bouche sur tous les clients
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(currentWeapon.shootSound); 
     }
 
     [Client]

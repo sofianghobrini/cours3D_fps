@@ -48,6 +48,12 @@ public class Player : NetworkBehaviour
     [SerializeField]
     private GameObject respawnEffect;
 
+    [SerializeField]
+    private AudioClip deathSound;
+
+    [SerializeField]
+    private AudioClip hitSound;
+
     private bool firstSetup = true;
 
     public void Setup()
@@ -153,11 +159,15 @@ public class Player : NetworkBehaviour
         {
             return;
         }
+
+        AudioSource audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(hitSound); 
             
         currentHealth -= amount;
         //Debug.Log(transform.name + " a " + currentHealth + " points de vie restants.");
         if(currentHealth <= 0 && !isDead)
         {
+            audioSource.PlayOneShot(deathSound); 
             Die(sourceId);
         }
     }
