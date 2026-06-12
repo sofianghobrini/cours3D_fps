@@ -59,12 +59,7 @@ public class PlayerSetup : NetworkBehaviour
             } 
 
 
-            GetComponent<Player>().Setup(); 
-
-
-            string username = UserAccountManager.LoggedInUsername;
-
-            CmdSetUsername(transform.name, username); 
+            GetComponent<Player>().Setup();             
         }
 
         
@@ -86,10 +81,26 @@ public class PlayerSetup : NetworkBehaviour
     {
         base.OnStartClient();
 
+        RegisterPlayerAndSetUsername();
+       
+    }
+
+
+    //Enregistre le joueur dans le GameManager pour permettre la gestion des joueurs et de leurs données
+    public override void OnStartServer()
+    {
+        base.OnStartServer();
+
+        RegisterPlayerAndSetUsername();
+    }
+
+    private void RegisterPlayerAndSetUsername()
+    {
         string netId = GetComponent<NetworkIdentity>().netId.ToString();
         Player player = GetComponent<Player>();
 
         GameManager.RegisterPlayer(netId, player);
+        CmdSetUsername(transform.name, UserAccountManager.LoggedInUsername); 
     }
 
 
